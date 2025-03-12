@@ -12,7 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Clear loading message
       activitiesList.innerHTML = "";
-
+      // Display total number of activities
+      const totalActivities = document.createElement("p");
+      totalActivities.textContent = `Total Activities: ${Object.keys(activities).length}`;
+      activitiesList.appendChild(totalActivities);
       // Populate activities list
       Object.entries(activities).forEach(([name, details]) => {
         const activityCard = document.createElement("div");
