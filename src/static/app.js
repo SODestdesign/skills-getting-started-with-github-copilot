@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const response = await fetch("/activities");
       const activities = await response.json();
-
+      // Display loading message
+      activitiesList.innerHTML = "<p>Loading activities...</p>";
       // Clear loading message
       activitiesList.innerHTML = "";
       // Display total number of activities
