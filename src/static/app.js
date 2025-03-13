@@ -7,12 +7,16 @@ document.addEventListener("DOMContentLoaded", () => {
   // Function to fetch activities from API
   async function fetchActivities() {
     try {
+      // Display loading message
+      activitiesList.innerHTML = "<p>Loading activities...</p>";
       const response = await fetch("/activities");
       const activities = await response.json();
-
       // Clear loading message
       activitiesList.innerHTML = "";
-
+      // Display total number of activities
+      const totalActivities = document.createElement("p");
+      totalActivities.textContent = `Total Activities: ${Object.keys(activities).length}`;
+      activitiesList.appendChild(totalActivities);
       // Populate activities list
       Object.entries(activities).forEach(([name, details]) => {
         const activityCard = document.createElement("div");
@@ -25,6 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+          <p><strong>Participants:</strong></p>
+          <ul>
+            ${details.participants.map(participant => `<li>${participant}</li>`).join('')}
+          </ul>
         `;
 
         activitiesList.appendChild(activityCard);
